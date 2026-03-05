@@ -3,11 +3,8 @@ from pathlib import Path
 
 MODEL = "qwen2.5:7b"
 
-INPUT_ROOT = Path("data/bullets")
+INPUT_ROOT = Path("data/final_clusters")
 OUTPUT_ROOT = Path("data/sections")
-
-OLLAMA_URL = "http://localhost:11434/api/generate"
-
 
 PROMPT = """
 You are converting factual bullet points into clear explanatory prose.
@@ -50,86 +47,54 @@ BULLETS
 """
 
 
-# -------------------------
-# LLM CALL
-# -------------------------
-
 def call_llm(prompt):
 
     r = requests.post(
-        OLLAMA_URL,
+        "http://localhost:11434/api/generate",
         json={
             "model": MODEL,
             "prompt": prompt,
             "stream": False,
-            "options": {"temperature": 0}
+            "temperature": 0
         }
     )
-
-    r.raise_for_status()
 
     return r.json()["response"]
 
 
-# -------------------------
-# PROCESS CHAPTER
-# -------------------------
-
-def process_chapter(file_path, out_path):
-
-    with open(file_path) as f:
-        raw = [l.strip().lstrip("• ").strip() for l in f.readlines() if l.strip()]
-
-    if not raw:
-        return
-
-    facts = []
-
-    for i, bullet in enumerate(raw, 1):
-        facts.append(f"{i}. {bullet}")
-
-    bullets = "\n".join(facts)
-
-    full_prompt = PROMPT + "\n\n" + bullets
-
-    response = call_llm(full_prompt)
-
-    with open(out_path, "w") as f:
-        f.write(response)
-
-
-# -------------------------
-# PROCESS EPISODE
-# -------------------------
-
 def process_episode(ep_dir):
 
-    print(f"\nProcessing episode: {ep_dir.name}")
+    print(f"\nProcessing {ep_dir.name}")
 
     out_dir = OUTPUT_ROOT / ep_dir.name
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    bullet_files = sorted(ep_dir.glob("*.txt"))
+    cluster_files = sorted(ep_dir.glob("cluster_*.txt"))
 
-    for file in bullet_files:
+    for i, cluster_file in enumerate(cluster_files):
 
-        print(f"  chapter: {file.name}")
+        with open(cluster_file) as f:
+            raw = [l.strip("• ").strip() for l in f.readlines() if l.strip()]
 
-        out_file = out_dir / file.name
+        facts = []
+        for i, b in enumerate(raw, 1):
+            facts.append(f"{i}. {b}")
 
-        process_chapter(file, out_file)
+        bullets = "\n".join(facts)
 
+        full_prompt = PROMPT + "\n\n" + bullets
 
-# -------------------------
-# MAIN
-# -------------------------
+        print(f"  cluster {i+1}")
+
+        response = call_llm(full_prompt)
+
+        with open(out_dir / f"para_{i+1}.txt", "w") as f:
+            f.write(response)
+
 
 def main():
 
-    episodes = sorted(INPUT_ROOT.iterdir())
-
-    for ep in episodes:
-
+    for ep in INPUT_ROOT.iterdir():
         if ep.is_dir():
             process_episode(ep)
 

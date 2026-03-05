@@ -1,0 +1,28 @@
+0.0|78.0|Intro
+78.0|283.0|Vidit Aatrey's story
+283.0|351.0|What is Meesho?
+351.0|500.0|Who is Kishore Biyani?
+500.0|975.0|Rebellion, insecurity and success
+975.0|1113.0|How Kishore Biyani made it big
+1113.0|1189.0|Kishore Biyani's inspirations, Tirupati, Saravana Stores
+1189.0|1485.0|Sujeet Kumar's Story
+1485.0|1715.0|The origins of FlipKart
+1715.0|1884.0|Udaan and Sujeet's investments
+1884.0|1995.0|Rameshwaram Cafe's incredible numbers
+1995.0|2151.0|Kishore Biyani's most profitable business
+2151.0|2375.0|The changing ecosystem of Saudi Arabia
+2375.0|2510.0|The brands that scaled in India
+2510.0|2587.0|Selling online vs. offline
+2587.0|2915.0|Do we have any agency over how we shop?
+2915.0|3522.0|Influencer Marketing in E-commerce
+3522.0|4066.0|Past, present and future of selling in India, The Temple Economy
+4066.0|4550.0|Why do some products sell and others don't
+4550.0|4903.0|How different generations shop
+4903.0|5366.0|Nikhil: Multiplexes aren't dead
+5366.0|5676.0|Why India isn't like the West
+5676.0|6223.0|Kishore Biyani's philosophy + life advice
+6223.0|6564.0|ONDC (Open Network for Digital Commerce) explained
+6564.0|6789.0|Nykaa discussion - the only publicly listed Indian e-commerce brand
+6789.0|7071.0|Meesho's valuation
+7071.0|7449.0|How to get into e-commerce and the future of selling online
+7449.0|7693|Concluding thoughts

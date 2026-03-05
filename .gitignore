@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual env
+venv/
+
+# Mac files
+.DS_Store
+
+# Data (generated)
+data/audio/
+data/transcripts/
+data/bullets/
+data/corrections/
+
+# Large files
+*.wav
+*.webm
+
+# Model cache
+.cache/
